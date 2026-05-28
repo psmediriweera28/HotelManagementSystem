@@ -25,11 +25,13 @@
     }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-dark  shadow-sm" style="background-color: #2c9f47">
+<nav class="navbar navbar-expand-lg navbar-dark  shadow py-0" style="background-color: rgb(14, 75, 37)">
     <div class="container">
         <!-- Brand -->
+        <a class="navbar-brand ms-2" href="{{ route('home') }}" >
         <img src="{{ asset('images/logo.png')}}" alt="Logo" width="40" height="40" class="rounded-circle">
-        <a class="navbar-brand ms-2" href="{{ route('home') }}" >DIO Green Hilltop</a>
+        
+        </a>
 
         <!-- Toggler for mobile -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -37,7 +39,7 @@
         </button>
 
         <!-- Navbar Links -->
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav" style="font-family: 'Montserrat', sans-serif;">
             <ul class="navbar-nav me-auto">
                 <!-- Tabs (example: Rooms, Guests, Bookings) -->
                 <li class="nav-item">

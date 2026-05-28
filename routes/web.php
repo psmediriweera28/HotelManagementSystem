@@ -19,7 +19,7 @@ use App\Http\Controllers\UserPaymentController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 })->name('home');
 
 Route::view('/rooms', 'pages.rooms')->name('rooms');
