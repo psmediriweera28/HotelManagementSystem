@@ -8,93 +8,130 @@
 <style>
 /* Admin Food Orders Table */
 
+body{
+    background: linear-gradient(to right, #021b12, #0b3d2e);
+}
+
+/* Title */
 .h1-tag{
-    margin: 1rem;
-    font-size: 2rem;
-    color: green;
-}
-.table {
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #fff;
-    margin-left: 3rem;
+    font-size: 30px;
+    color: #22c55e;
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    padding: 20px;
+    margin-bottom: 8px;
 }
 
-.table thead {
-    background: linear-gradient(135deg, #06980d, #457b9d);
+/* Wrapper */
+.orders-wrapper{
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    margin-left: 10px;
+    
+    margin-top: 0px;
 }
 
-.table thead th {
-    color: #fff;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    border: none;
+/* Table */
+.orders-table{
+    color: white;
+    margin-bottom: 0;
 }
 
-.table tbody tr {
-    transition: all 0.2s ease-in-out;
+.orders-table thead{
+    background: rgba(34,197,94,0.15);
 }
 
-.table tbody tr:hover {
-    background-color: #f1f7ff;
+.orders-table thead th{
+    color: #22c55e;
+    border-color: rgba(255,255,255,0.1);
+    font-weight: bold;
 }
 
-.table td,
-.table th {
-    padding: 12px 14px;
+.orders-table td{
+    border-color: rgba(255,255,255,0.08);
     vertical-align: middle;
 }
 
-.table td {
-    font-size: 0.9rem;
+.orders-table tbody tr:hover{
+    background: rgba(255,255,255,0.05);
 }
 
-.badge-food {
-    background-color: #198754;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
+/* Food Badge */
+.badge-food{
+    background: rgba(34,197,94,0.2);
+    color: #22c55e;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-weight: 600;
 }
 
-.price {
+/* Price */
+.price{
+    color: #22c55e;
     font-weight: bold;
-    color: #084627;
 }
+
+/* Date */
+.order-date{
+    color: rgba(255,255,255,0.7);
+}
+
 
 </style>
 
 <h1 class="h1-tag">Food Orders</h1>
 
-<table class="table table-striped table-hover table-bordered align-middle shadow-sm">
+<div class="orders-wrapper">
+
+<table class="table orders-table align-middle">
+
     <thead>
         <tr>
-            <th>#</th>
-            <th>User</th>
-            <th>Food</th>
-            <th>Qty</th>
-            <th>Total</th>
-            <th>Created at</th>
+            <th width="70">#</th>
+            <th width="180">User</th>
+            <th width="200">Food</th>
+            <th width="100">Qty</th>
+            <th width="150">Total</th>
+            <th>Created At</th>
         </tr>
     </thead>
+
     <tbody>
+
         @foreach($orders as $order)
+
         <tr>
+
             <td>{{ $order->id }}</td>
+
             <td>{{ $order->user->name ?? '-' }}</td>
+
             <td>
                 <span class="badge-food">
-                        {{ $order->foodMenu->name ?? '-' }}
+                    {{ $order->foodMenu->name ?? '-' }}
                 </span>
             </td>
-            
+
             <td>{{ $order->quantity }}</td>
 
-            <td class="price">Rs. {{ number_format($order->total_price, 2) }}</td>
-            <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
+            <td class="price">
+                Rs. {{ number_format($order->total_price, 2) }}
+            </td>
+
+            <td class="order-date">
+                {{ $order->created_at->format('Y-m-d H:i') }}
+            </td>
+
         </tr>
+
         @endforeach
+
     </tbody>
+
 </table>
+
+</div>
 @endsection

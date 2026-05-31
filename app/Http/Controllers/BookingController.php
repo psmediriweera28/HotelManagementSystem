@@ -39,6 +39,44 @@ class BookingController extends Controller
         // find room by name
         $room = Room::where('name', $data['room_name'])->firstOrFail();
 
+        
+        // Check overlapping bookings
+
+$existingBooking = Booking::where('room_name', $room->name)
+
+->where(function($query) use ($data){
+
+    $query->whereBetween('check_in', [
+        $data['check_in'],
+        $data['check_out']
+    ])
+
+    ->orWhereBetween('check_out', [
+        $data['check_in'],
+        $data['check_out']
+    ])
+
+    ->orWhere(function($q) use ($data){
+
+        $q->where('check_in', '<=', $data['check_in'])
+
+          ->where('check_out', '>=', $data['check_out']);
+    });
+
+})
+
+->exists();
+
+if($existingBooking){
+
+    return back()->withErrors([
+
+        'room_name' => 'Sorry! This room is already booked for selected dates.'
+
+    ])->withInput();
+}
+
+
         $roomPrice = $room->price;          // from rooms table
         $foodTotal = 0;
 

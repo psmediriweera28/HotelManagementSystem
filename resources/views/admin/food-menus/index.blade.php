@@ -5,79 +5,117 @@
 @section('content')
 <style>
 
-    .h2-tag{
-        font-size: 30px;
-        color: green;
-        
-    }
-    /* Page wrapper */
-    .food-page {
-        max-width: 900px;
-        margin-left: 3rem;
-    }
+   body{
+    background: linear-gradient(to right, #021b12, #0b3d2e);
+}
 
-    /* Cards */
-    .food-card {
-        border-radius: 10px;
-        border: 1px solid #e5e5e5;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    }
+/* Page Title */
+.h2-tag{
+    font-size: 30px;
+    color: #22c55e;
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    margin-top: -20px;
+}
 
-    .card-header{
-        margin-left: 0rem;
-        margin-bottom: 1rem;
-        font-weight:700;
-        color: rgb(0, 0, 0);
-        background-color: #198754;
-    }
+/* Page Wrapper */
+.food-page{
+    max-width: 1200px;
 
-    .food-card {
-        
-        color: #000000;
-        font-weight: 600;
-        font-size: 1rem;
-        
-    }
+    padding: 30px;
+}
 
-    /* Form */
-    .form-label {
-        font-weight: 600;
-    }
+/* Cards */
+.food-card{
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    overflow: hidden;
+    padding: 20px;
+}
 
-    .form-control {
-        border-radius: 6px;
-    }
+/* Card Header */
+.card-header{
+    background: rgba(34,197,94,0.2) !important;
+    color: #22c55e !important;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
 
-    /* Remove number arrows */
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+/* Labels */
+.form-label{
+    color: white;
+    font-weight: 600;
+}
 
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
+/* Inputs */
+.form-control{
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    border-radius: 12px;
+}
 
-    .btn-save {
-        background: #198754;
-        border: none;
-        padding: 8px 25px;
-        border-radius: 6px;
-    }
+.form-control:focus{
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border-color: #22c55e;
+    box-shadow: 0 0 10px rgba(34,197,94,0.5);
+}
 
-    .btn-save:hover {
-        background: #157347;
-    }
+.form-control::placeholder{
+    color: rgba(255,255,255,0.5);
+}
 
-    /* Table */
-    .food-table thead {
-        background: #f8f9fa;
-    }
+/* Save Button */
+.btn-save{
+    background: #22c55e;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 12px;
+    font-weight: bold;
+}
 
-    .food-table th {
-        font-weight: 600;
-    }
+.btn-save:hover{
+    background: #16a34a;
+    transform: translateY(-2px);
+}
+
+/* Table */
+.food-table{
+    color: white;
+    margin-bottom: 0;
+
+    
+}
+
+.food-table thead{
+    background: rgba(34,197,94,0.15);
+}
+
+.food-table th{
+    color: #22c55e;
+    border-color: rgba(255,255,255,0.1);
+}
+
+.food-table td{
+    border-color: rgba(255,255,255,0.08);
+    vertical-align: middle;
+}
+
+.food-table tbody tr:hover{
+    background: rgba(255,255,255,0.05);
+}
+
+/* Images */
+.food-preview{
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+}
 </style>
 
 <div class="container py-4 food-page">
@@ -93,7 +131,8 @@
         <div class="card-header">Add New Food Item</div>
         <div class="card-body">
 
-            <form action="{{ route('admin.food-menus.store') }}" method="POST">
+            <form action="{{ route('admin.food-menus.store') }}" method="POST"
+            enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -116,6 +155,18 @@
                            placeholder="e.g. 450.00" required>
                 </div>
 
+                <div class="mb-3">
+                <label class="form-label">
+                    Food Image
+                </label>
+
+                <input
+                    type="file"
+                    name="image"
+                    class="form-control"
+                    accept="image/*">
+            </div>
+
                 <button class="btn btn-save text-white">Save</button>
             </form>
 
@@ -131,19 +182,36 @@
                 <thead>
                     <tr>
                         <th width="60">#</th>
-                        <th width="200">Name</th>
-                        <th>Description</th>
-                        <th width="120" class="text-end">Price</th>
+                        <th width="100">Name</th>
+                        <th width="180">Description</th>
+                        <th>Image</th>
+                        <th class="text-end" width="140">Price</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($menus as $menu)
-                    <tr>
-                        <td>{{ $menu->id }}</td>
-                        <td>{{ $menu->name }}</td>
-                        <td>{{ $menu->description }}</td>
-                        <td class="text-end">{{ number_format($menu->price, 2) }}</td>
-                    </tr>
+                   <tr>
+    <td>{{ $menu->id }}</td>
+
+    <td>
+        @if($menu->image)
+            <img src="{{ asset('storage/'.$menu->image) }}"
+                 class="food-preview">
+        @else
+            No Image
+        @endif
+    </td>
+
+    <td>{{ $menu->name }}</td>
+
+    <td>{{ $menu->description }}</td>
+
+    <td class="text-end">
+        LKR {{ number_format($menu->price,2) }}
+    </td>
+</tr>
+
+
                     @empty
                     <tr>
                         <td colspan="4" class="text-center py-3">

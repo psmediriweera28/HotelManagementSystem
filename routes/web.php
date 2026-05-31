@@ -27,7 +27,10 @@ Route::view('/rooms', 'pages.rooms')->name('rooms');
 Route::view('/contact-us', 'pages.contact')->name('contact');
 Route::view('/more', 'pages.more')->name('more');
 Route::view('/more/gallery', 'pages.more-gallery')->name('more.gallery');
-Route::view('/more/feedbacks', 'pages.more-feedbacks')->name('more.feedbacks');
+Route::get('/more/feedbacks',
+[FeedbackController::class, 'showPublicFeedbacks'])
+
+->name('more.feedbacks');
 Route::view('/more/offers', 'pages.more-offers')->name('more.offers');
 
 

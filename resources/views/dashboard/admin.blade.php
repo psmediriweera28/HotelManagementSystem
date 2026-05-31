@@ -17,18 +17,39 @@
         color: green;
     }
 
-    body {
-        background: #e8ebdf;
-    }
-    .dashboard-wrapper {
-        max-width: 1200px;
-        margin: 20px auto;
-        border-radius: 24px;
-        background: #ffffff;
-        padding: 24px;
-        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-        border: 6px solid #1c9b63;
-    }
+    body{
+    background:
+    linear-gradient(
+    rgba(0,0,0,0.80),
+    rgba(0,0,0,0.80)
+    ),
+    url('{{ asset('images/admin-dashboard-bg.jpg') }}');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+    .dashboard-wrapper{
+
+    max-width: 1200px;
+
+    margin: 20px auto;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(15px);
+
+    padding: 30px;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+
     .dash-header {
         display: flex;
         justify-content: space-between;
@@ -57,21 +78,173 @@
         font-size: 14px;
     }
 
-    .card-soft {
-        border: none;
-        border-radius: 18px;
-        background: #f4f6f5;
-        padding: 18px 20px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-        height: 100%;
-    }
-    .card-soft h6 {
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: .08em;
-        color: #7b8b83;
-        margin-bottom: 6px;
-    }
+    .card-soft{
+
+    border:none;
+
+    border-radius:20px;
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(10px);
+
+    padding:20px;
+
+    color:white;
+
+    transition:0.3s ease;
+}
+
+.card-soft:hover{
+
+    transform: translateY(-5px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+
+    .card-soft h6{
+
+    color:#d1d5db;
+}
+
+/* .navbar{
+
+    background: rgba(0,0,0,0.85) !important;
+
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand,
+.nav-link,
+.navbar-text{
+
+    color:white !important;
+} */
+/* 
+.navbar{
+
+    background: #ffffff !important;
+
+    border-radius: 15px;
+
+    margin: 15px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+} */
+
+.navbar-brand{
+
+    font-size: 1.5rem;
+
+    font-weight: 700;
+
+    color: #198754 !important;
+}
+
+.nav-link{
+
+    color: #ffffff !important;
+
+    font-weight: 500;
+
+    transition: 0.3s;
+}
+
+/* .nav-link:hover{
+
+    color: #198754 !important;
+}
+
+.navbar-text{
+
+    color: #333 !important;
+
+    font-weight: 600;
+} */
+
+.navbar-toggler{
+
+    border: none;
+}
+
+.btn-sm{
+
+    border: 1px solid #dc3545;
+
+    color: #dc3545;
+
+    border-radius: 8px;
+
+    padding: 5px 12px;
+
+    transition: 0.3s;
+}
+
+.btn-sm:hover{
+
+    background: #dc3545;
+
+    color: white !important;
+}
+
+
+
+.nav-link:hover{
+
+    color:#22c55e !important;
+}
+
+   .big-number{
+
+    color:#22c55e !important;
+}
+
+.small-text{
+
+    color:#cbd5e1;
+}
+
+
+.dash-header h4{
+
+    color:#22c55e;
+
+    font-size:32px;
+
+    font-weight:700;
+}
+
+.admin-name{
+
+    color:white;
+}
+
+.avatar{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
+    font-weight:bold;
+
+    font-size:18px;
+
+    box-shadow:0 0 15px rgba(34,197,94,0.5);
+}
+
     .card-soft .big-number {
         font-size: 26px;
         font-weight: 600;
@@ -137,7 +310,7 @@
     }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+<nav class="navbar navbar-expand-lg ">
     <div class="container">
         <a class="navbar-brand" href="{{ route('admin.dashboard') }}">Admin Panel</a>
 

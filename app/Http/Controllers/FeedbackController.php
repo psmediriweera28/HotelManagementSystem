@@ -28,4 +28,14 @@ class FeedbackController extends Controller
 
         return back()->with('success', 'Thank you for your feedback!');
     }
+
+    public function showPublicFeedbacks(){
+
+    $feedbacks = \App\Models\Feedback::latest()->get();
+
+    return view('pages.more-feedbacks',
+    compact('feedbacks'));
+}
+
+
 }
